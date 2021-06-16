@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+
+# require 'bundler/setup' Do I need this? Auto input when gem created.
+require_relative '../lib/dam_exhibit_info'
+
+DamExhibitInfo::CLI.new.call
