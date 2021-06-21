@@ -14,7 +14,7 @@ class DamExhibitInfo::Scraper
         Nokogiri::HTML(open("https://www.denverartmuseum.org/en/exhibitions"))
     end 
 
-    # current exhibits 
+    # current exhibits:
     def self.scrape_current_exhibits_index
         self.get_page.css("div.section.section-view.mode-default.full-width#current a.full-card").each.with_index(1) do |exhibit, index|
             name = exhibit.css("div.title").text.strip
@@ -25,7 +25,7 @@ class DamExhibitInfo::Scraper
         end
     end
 
-    # upcoming coming soon:
+    # upcoming exhibits:
     def self.scrape_upcoming_exhibits_index
         self.get_page.css("div.section.section-view.mode-default.full-width#view-23075 a.full-card").each.with_index(1) do |exhibit, index|
             name = exhibit.css("div.title").text.strip
@@ -36,11 +36,15 @@ class DamExhibitInfo::Scraper
         end
     end
 
-    def scrape_exhibit_urls
+    # def scrape_exhibit_urls
         
-    end
+    # end
 
-    # def scrape_exhibits_details
+    # def scrape_current_exhibit_details
+
+    # end
+
+    # def scrape_upcoming_exhibit_details
 
     # end
 end
