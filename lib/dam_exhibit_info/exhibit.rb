@@ -30,6 +30,9 @@ class DamExhibitInfo::Exhibit
         exhibit
     end
 
+    # Maybe current and upcoming exhibit methods in CLI need to go in here???
+    # then I can save those instances to @@all and keep track of everything???
+
     # def self.find_by_name(name)
     #     exhibit.all.find {|exhibit| exhibit.name == name}
     # end

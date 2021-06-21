@@ -41,7 +41,7 @@ class DamExhibitInfo::CLI
     #     # will just need to go back one level
     # end
 
-    def current_exhibits
+    def current_exhibits # this might need to go in the Exhibit class???
         puts "\nHere are the current exhibits at the Denver Art Museum\n"
         # puts "Select a number below for a detailed discription of the exhibit"
         puts "\n======================================================="
@@ -53,7 +53,7 @@ class DamExhibitInfo::CLI
         menu_options
     end
 
-    def upcoming_exhibits
+    def upcoming_exhibits # this might need to go in the Exhibit class???
         puts "\nHere are the upcoming exhibits at the Denver Art Museum"
         # puts "Select a number below for a detailed discription of the exhibit"
         puts "\n==============================================================="
