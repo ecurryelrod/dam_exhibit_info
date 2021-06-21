@@ -7,7 +7,9 @@
 #   # Your code goes here...
 # end
 
+require_relative '../config/environment'
+
 module DamExhibitInfo
 end
 
-require_relative '../config/environment'
+

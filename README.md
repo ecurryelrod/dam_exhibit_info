@@ -1,5 +1,4 @@
-# DamExhibitInfo 
-ksdlfjh
+# DamExhibitInfo
 
 Find information about current and upcoming exhibits at the Denver Art Museum.
 
