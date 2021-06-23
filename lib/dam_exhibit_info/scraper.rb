@@ -14,30 +14,45 @@ class DamExhibitInfo::Scraper
         Nokogiri::HTML(open("https://www.denverartmuseum.org/en/exhibitions"))
     end 
 
-    # current exhibits:
-    def self.scrape_current_exhibits_index
-        self.get_page.css("div.section.section-view.mode-default.full-width#current a.full-card").each.with_index(1) do |exhibit, index|
+    def self.scrape_exhibits(selector)
+        self.get_page.css(selector).each do |exhibit| # had: self.get_page.css(selector).each.with_index(1) do |exhibit, index|
             name = exhibit.css("div.title").text.strip
             date = exhibit.css("div.dateline").text.strip
             summary = exhibit.css("div.subtitle").text.strip
+            binding.pry
+            link = exhibit.css("a.full-card").attribute("href").value
             
-            puts "#{index}. #{name} - #{date} - #{summary}"
+            selector.include?("current") ? current = true : current = false
+            DamExhibitInfo::Exhibit.create(name, date, summary, current)
         end
+        # binding.pry
     end
 
-    # upcoming exhibits:
-    def self.scrape_upcoming_exhibits_index
-        self.get_page.css("div.section.section-view.mode-default.full-width#view-23075 a.full-card").each.with_index(1) do |exhibit, index|
-            name = exhibit.css("div.title").text.strip
-            date = exhibit.css("div.dateline").text.strip
-            summary = exhibit.css("div.subtitle").text.strip
+    # def self.scrape_exhibit_urls(exhibit)
+    #     page = Nokogiri::HTML(open("https://www.denverartmuseum.org/en/exhibitions/#{exhibit.name}"))
+    #     # binding.pry
+    # end
 
-            puts "#{index}. #{name} - #{date} - #{summary}"
-        end
-    end
+    # current exhibits:
+    # def self.scrape_current_exhibits_index
+    #     self.get_page.css("div.section.section-view.mode-default.full-width#current a.full-card").each.with_index(1) do |exhibit, index|
+    #         name = exhibit.css("div.title").text.strip
+    #         date = exhibit.css("div.dateline").text.strip
+    #         summary = exhibit.css("div.subtitle").text.strip
+    #         DamExhibitInfo::Exhibit.create(name, date, summary, current)
+    #     end
+    #     binding.pry
+    # end
 
-    # def scrape_exhibit_urls
-        
+    # # upcoming exhibits:
+    # def self.scrape_upcoming_exhibits_index
+    #     self.get_page.css("div.section.section-view.mode-default.full-width#view-23075 a.full-card").each.with_index(1) do |exhibit, index|
+    #         name = exhibit.css("div.title").text.strip
+    #         date = exhibit.css("div.dateline").text.strip
+    #         summary = exhibit.css("div.subtitle").text.strip
+
+    #         # puts "#{index}. #{name} - #{date} - #{summary}"
+    #     end
     # end
 
     # def scrape_current_exhibit_details

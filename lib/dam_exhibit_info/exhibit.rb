@@ -3,12 +3,15 @@
 require 'pry'
 
 class DamExhibitInfo::Exhibit 
-    attr_accessor :name, :date, :subtitle #:description
+    attr_accessor :name, :date, :summary, :current#, :description #, :link, 
 
     @@all = []
 
-    def initialize#(name, date, subtitle = "")
-        
+    def initialize(name, date, summary = "", current)
+        @name = name
+        @date = date
+        @summary = summary
+        @current = current
     end
 
     def save
@@ -23,22 +26,45 @@ class DamExhibitInfo::Exhibit
         @@all.clear
     end
 
-    def self.create(name, date, subtitle = "")
-        exhibit = self.new(name, date, subtitle)
-        exhibit.save
-        # create conditional here if exhibit doesn't have subtitle???
+    def self.create(name, date, summary = "", current)
+        exhibit = self.new(name, date, summary, current)
+        # exhibit = self.new(name, date, summary)
+        exhibit.name = name
+        exhibit.save unless self.find_by_name(name)
         exhibit
     end
-
-    # Maybe current and upcoming exhibit methods in CLI need to go in here???
-    # then I can save those instances to @@all and keep track of everything???
-
-    # def self.find_by_name(name)
-    #     exhibit.all.find {|exhibit| exhibit.name == name}
+    
+    # def self.create_by_name(exhibit_name)
+    #     exhibit = self.create(@name, @date, @summary, @current)
+    #     exhibit.name = exhibit_name
+    #     exhibit
     # end
+
+    def self.find_by_name(name)
+        self.all.find {|exhibit| exhibit.name == name}
+    end
 
     # def self.find_or_create_by_name(name)
-    #     self.find_by_name || self.create
+    #     self.find_by_name(@name) || self.create(@name, @date, @summary, @current)
     # end
+
+    def self.make_current_exhibits
+        # DamExhibitInfo::Scraper.scrape_current_exhibits_index
+        DamExhibitInfo::Scraper.scrape_exhibits("div.section.section-view.mode-default.full-width#current a.full-card")
+        
+    end
+
+    def self.make_upcoming_exhibits
+        DamExhibitInfo::Scraper.scrape_exhibits("div.section.section-view.mode-default.full-width#view-23075 a.full-card")
+        # binding.pry
+    end
+
+    def self.all_by_status(status)
+        if status == "current"
+            @@all.select {|exhibit| exhibit.current == true}
+        elsif status == "upcoming"
+            @@all.select {|exhibit| exhibit.current == false}
+        end
+    end
 end
 
