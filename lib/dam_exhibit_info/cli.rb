@@ -19,17 +19,24 @@ class DamExhibitInfo::CLI
             upcoming_exhibits
         when "exit"
             puts "\nHave a wonderful day filled with art!"
+            puts ""
         end
     end
 
     def menu_options
-        puts "To go back to the root menu type 'menu'"
+        puts "\nTo go back to the root menu type 'menu'"
+        # puts "To see to Current Exhibits type 'current'"
+        # puts "To see Upcoming Exhibits type 'upcoming'"
         puts "To exit the program type 'exit'"
         input = gets.strip
 
         case input
         when "menu"
             get_user_input
+        # when "current"
+        #     current_exhibits
+        # when "upcoming"
+        #     upcoming_exhibits
         when "exit"
             puts "\nHave a wonderful day filled with art!"
             puts ""
@@ -37,7 +44,8 @@ class DamExhibitInfo::CLI
     end
 
     def valid_selection?
-
+    # input = gets.to_i
+    # if input
     end
     
     def current_exhibits
@@ -48,40 +56,35 @@ class DamExhibitInfo::CLI
         DamExhibitInfo::Exhibit.make_current_exhibits
         DamExhibitInfo::Exhibit.all_by_status("current").each.with_index(1) {|exhibit, index| puts "#{index}. #{exhibit.name} - #{exhibit.date} - #{exhibit.summary}"}
         puts "\n==============================================================="
-        # User will select a number relating to the event they want to see detailed description about
-        # that selection should reference the link to that exhibit object's page
-        # Will need to scrape links for each exhibit, then create an exhibit_details object from that data
-        # then that object gets called when a user makes a selection
-        # maybe create a CLI new method to handle this and call it here???
-        input = gets.strip
+        # valid_selection?
         
-        # if input.valid_selection? 
-        #     input = 
-        # end
+        input = gets.to_i
+        selection = DamExhibitInfo::Exhibit.all[input - 1]
+        puts ""
+        puts DamExhibitInfo::Exhibit.current_exhibit_description(selection)
         menu_options
     end
 
-    def upcoming_exhibits # this might need to go in the Exhibit class???
+    def upcoming_exhibits
         puts "\nHere are the upcoming exhibits at the Denver Art Museum"
-        # puts "Select a number below for a detailed discription of the exhibit"
+        puts "Select a number below for a detailed discription of the exhibit"
         puts "\n==============================================================="
         DamExhibitInfo::Exhibit.make_upcoming_exhibits
         DamExhibitInfo::Exhibit.all_by_status("upcoming").each.with_index(1) {|exhibit, index| puts "#{index}. #{exhibit.name} - #{exhibit.date} - #{exhibit.summary}"}
         puts "\n==============================================================="
+        
+        input = gets.to_i
+        selection = DamExhibitInfo::Exhibit.all[input - 1]
+        puts ""
+        puts DamExhibitInfo::Exhibit.upcoming_exhibit_description(selection)
         menu_options
-        # or input = gets.strip for current_exhibit_details
-        # would have to write a case statement for each option.... not ideal
     end
 
-    # def current_exhibit_details_for(chosen_exhibit) ???
-    #     # scrape details for each current exhibit and take into account
-    #     # user input for specific exhibit selection
+    # def exhibit_details
+    #     input = gets.to_i
+    #     selection = DamExhibitInfo::Exhibit.all[input - 1]
+    #     puts ""
+    #     puts DamExhibitInfo::Exhibit.exhibit_description(selection)
     #     menu_options
     # end
-
-    # def upcoming_exhibit_details(chosen_exhibit) ???
-    #     # scrape details for each upcoming exhibit and take into account
-    #     # user input for specific exhibit selection
-    #     menu_options
-    # end 
 end 
