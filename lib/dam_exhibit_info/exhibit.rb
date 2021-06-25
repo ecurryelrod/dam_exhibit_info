@@ -53,9 +53,13 @@ class DamExhibitInfo::Exhibit
         end
     end
 
+    def self.exhibit_description(exhibit)
+        DamExhibitInfo::Scraper.scrape_exhibit_description(exhibit)
+    end
+    
     def self.current_exhibit_description(exhibit)
         if exhibit.current == true
-            binding.pry
+            # binding.pry
             DamExhibitInfo::Scraper.scrape_exhibit_description(exhibit)
         end
         
@@ -67,7 +71,7 @@ class DamExhibitInfo::Exhibit
 
     def self.upcoming_exhibit_description(exhibit)
         if exhibit.current == false
-            binding.pry
+            # binding.pry
             DamExhibitInfo::Scraper.scrape_exhibit_description(exhibit)
         end
         # if self.all_by_status("upcoming")

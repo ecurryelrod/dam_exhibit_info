@@ -63,6 +63,7 @@ class DamExhibitInfo::CLI
         puts ""
         puts DamExhibitInfo::Exhibit.current_exhibit_description(selection)
         menu_options
+        # exhibit_details
     end
 
     def upcoming_exhibits
@@ -78,13 +79,14 @@ class DamExhibitInfo::CLI
         puts ""
         puts DamExhibitInfo::Exhibit.upcoming_exhibit_description(selection)
         menu_options
+        # exhibit_details
     end
 
-    # def exhibit_details
-    #     input = gets.to_i
-    #     selection = DamExhibitInfo::Exhibit.all[input - 1]
-    #     puts ""
-    #     puts DamExhibitInfo::Exhibit.exhibit_description(selection)
-    #     menu_options
-    # end
+    def exhibit_details
+        input = gets.to_i
+        selection = DamExhibitInfo::Exhibit.all[input - 1]
+        puts ""
+        puts DamExhibitInfo::Exhibit.exhibit_description(selection)
+        menu_options
+    end
 end 
