@@ -53,20 +53,15 @@ class DamExhibitInfo::Exhibit
         end
     end
 
-    def self.exhibit_description(exhibit)
-        DamExhibitInfo::Scraper.scrape_exhibit_description(exhibit)
-    end
+    # def self.exhibit_description(exhibit)
+    #     DamExhibitInfo::Scraper.scrape_exhibit_description(exhibit)
+    # end
     
     def self.current_exhibit_description(exhibit)
         if exhibit.current == true
             # binding.pry
             DamExhibitInfo::Scraper.scrape_exhibit_description(exhibit)
         end
-        
-        # if self.all_by_status("current")
-        #     DamExhibitInfo::Scraper.scrape_exhibit_description(exhibit)
-        # end
-        # binding.pry
     end 
 
     def self.upcoming_exhibit_description(exhibit)
@@ -74,10 +69,6 @@ class DamExhibitInfo::Exhibit
             # binding.pry
             DamExhibitInfo::Scraper.scrape_exhibit_description(exhibit)
         end
-        # if self.all_by_status("upcoming")
-        #     DamExhibitInfo::Scraper.scrape_exhibit_description(exhibit)
-        # end
-        # binding.pry
     end
 end
 
