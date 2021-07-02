@@ -1,16 +1,15 @@
 class DamExhibitInfo::Exhibit 
-    attr_accessor :name, :date, :summary, :current, :link, :description
+    attr_reader :name, :date, :summary, :type, :link
+    attr_accessor :description
 
     @@all = []
-    @@exhibit_description = []
 
-    def initialize(name, date, summary = "", current, link)
+    def initialize(name, date, summary = "", type, link)
         @name = name
         @date = date
         @summary = summary
-        @current = current
+        @type = type
         @link = link
-        # @description = description
     end
 
     def save
@@ -25,9 +24,8 @@ class DamExhibitInfo::Exhibit
         @@all.clear
     end
 
-    def self.create(name, date, summary = "", current, link)
-        exhibit = self.new(name, date, summary, current, link)
-        exhibit.name = name
+    def self.create(name, date, summary = "", type, link)
+        exhibit = self.new(name, date, summary, type, link)
         exhibit.save unless self.find_by_name(name)
         exhibit
     end
@@ -35,40 +33,23 @@ class DamExhibitInfo::Exhibit
     def self.find_by_name(name)
         self.all.find {|exhibit| exhibit.name == name}
     end
-
-    def self.make_current_exhibits
-        DamExhibitInfo::Scraper.scrape_exhibit_info("div.section.section-view.mode-default.full-width#current a.full-card")
-        
-    end
-
-    def self.make_upcoming_exhibits
+    
+    def self.make_exhibits
+        DamExhibitInfo::Scraper.scrape_exhibit_info("div.section.section-view.mode-default.full-width#current a.full-card") && 
         DamExhibitInfo::Scraper.scrape_exhibit_info("div.section.section-view.mode-default.full-width#view-23075 a.full-card")
     end
 
-    def self.all_by_status(status)
-        if status == "current"
-            @@all.select {|exhibit| exhibit.current == true}
-        elsif status == "upcoming"
-            @@all.select {|exhibit| exhibit.current == false}
+    def self.all_exhibits_by_type(type)
+        self.make_exhibits
+        if type == "current"
+            self.all.select {|exhibit| exhibit.type == "current"}
+        elsif type == "upcoming"
+            self.all.select {|exhibit| exhibit.type == "upcoming"}
         end
     end
-
-    # def self.exhibit_description(exhibit)
-    #     DamExhibitInfo::Scraper.scrape_exhibit_description(exhibit)
-    # end
     
-    def self.current_exhibit_description(exhibit)
-        if exhibit.current == true
-            # binding.pry
-            DamExhibitInfo::Scraper.scrape_exhibit_description(exhibit)
-        end
-    end 
-
-    def self.upcoming_exhibit_description(exhibit)
-        if exhibit.current == false
-            # binding.pry
-            DamExhibitInfo::Scraper.scrape_exhibit_description(exhibit)
-        end
+    def self.exhibit_description(exhibit)
+        exhibit.description = DamExhibitInfo::Scraper.scrape_exhibit_description(exhibit)
     end
 end
 

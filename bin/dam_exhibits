@@ -3,5 +3,3 @@
 require_relative '../lib/dam_exhibit_info'
 
 DamExhibitInfo::CLI.new.call
-
-
