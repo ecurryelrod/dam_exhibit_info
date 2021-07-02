@@ -67,7 +67,6 @@ class DamExhibitInfo::CLI
     end
 
     def display_exhibits(type)
-        DamExhibitInfo::Exhibit.make_exhibits
         DamExhibitInfo::Exhibit.all_exhibits_by_type(type).each.with_index(1) {|exhibit, index| puts "#{index}. #{exhibit.name} - #{exhibit.date} - #{exhibit.summary}"}
         puts "\n==========================================================================================="
         menu_options(type)
