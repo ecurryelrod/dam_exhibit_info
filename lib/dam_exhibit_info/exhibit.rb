@@ -10,6 +10,7 @@ class DamExhibitInfo::Exhibit
         @summary = summary
         @type = type
         @link = link
+        @description = description
     end
 
     def save
@@ -18,10 +19,6 @@ class DamExhibitInfo::Exhibit
 
     def self.all
         @@all
-    end
-
-    def self.reset_all
-        @@all.clear
     end
 
     def self.create(name, date, summary = "", type, link)
