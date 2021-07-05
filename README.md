@@ -1,6 +1,6 @@
 # DamExhibitInfo
 
-DAM Exhibit Info provides a CLI for users to find information about current and upcoming exhibits at the Denver Art Museum. The user will be prompted to select current or upcoming exhibits to see more information about. They will then be given a list of those exhibits with the name, dates, and short summary of each one. From there the user can then choose to see a detailed description of an exhibit.
+DAM Exhibit Info provides a CLI for users to find information about current and upcoming exhibits at the Denver Art Museum. The user will be initially asked to select current or upcoming exhibits in order to see more information about them. They will then be given a list of those exhibits with the name, dates they will be viewable, and short summary of each one. From there the user can then choose to see a detailed description of an exhibit.
 
 ## Installation
 
