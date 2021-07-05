@@ -1,10 +1,6 @@
 # DamExhibitInfo
 
-Find information about current and upcoming exhibits at the Denver Art Museum.
-
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/dam_exhibit_info`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+DAM Exhibit Info provides a CLI for users to find information about current and upcoming exhibits at the Denver Art Museum. The user will be prompted to select current or upcoming exhibits to see more information about. They will then be given a list of those exhibits with the name, dates, and short summary of each one. From there the user can then choose to see a detailed description of an exhibit.
 
 ## Installation
 
@@ -24,7 +20,7 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+After running the interface by entering the command dam_exhibit_info, simply follow the prompts and enter the appropriate information for your search.
 
 ## Development
 

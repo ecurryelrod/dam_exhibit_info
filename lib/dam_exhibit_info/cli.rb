@@ -1,5 +1,6 @@
 class DamExhibitInfo::CLI 
     def call
+        system("clear")
         puts "\n*********************************************************************"
         puts "|                                                                   |"
         puts "|    >>>  Welcome to the Denver Art Museum Exhibit Finder!  <<<     |"
