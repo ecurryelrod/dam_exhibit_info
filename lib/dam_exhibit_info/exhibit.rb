@@ -10,7 +10,6 @@ class DamExhibitInfo::Exhibit
         @summary = summary
         @type = type
         @link = link
-        @description = description
     end
 
     def save
